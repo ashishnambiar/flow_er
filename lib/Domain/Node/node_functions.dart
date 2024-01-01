@@ -1,10 +1,10 @@
-import 'package:flow_er/Domain/Node/data_node.dart';
+import 'package:flow_er/Domain/Node/DataNodeModel/data_node_model.dart';
 
-DataNode start(dynamic v, [int i = -1]) {
+DataNode parseToDataNode(dynamic v, [int i = -1]) {
   final result = <DataNode>[];
   result.addAll(_loop(v));
   return DataNode(
-    key: 'data',
+    key: '{}',
     value: result,
     valueType: ValueType.map,
   );
