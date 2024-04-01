@@ -1,4 +1,4 @@
-import 'package:flow_er/Domain/Node/data_node.dart';
+import 'package:flow_er/Domain/Node/DataNodeModel/data_node_model.dart';
 import 'package:flutter/material.dart';
 
 class DataNodeWidget extends StatefulWidget {
@@ -23,7 +23,8 @@ class _DataNodeWidgetState extends State<DataNodeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
+      width: double.maxFinite,
       child: isOpen || widget.node.valueType == ValueType.leaf
           ? IgnorePointer(
               ignoring: widget.node.valueType == ValueType.leaf,
@@ -67,9 +68,17 @@ class _DataNodeWidgetState extends State<DataNodeWidget> {
                                 ),
                                 ...List.generate(
                                   widget.node.value.length,
-                                  (index) => DataNodeWidget(
-                                      node: widget.node.value[index],
-                                      i: widget.i + 1),
+                                  (index) => Container(
+                                    padding: const EdgeInsets.only(left: 4),
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        left: BorderSide(color: Colors.black),
+                                      ),
+                                    ),
+                                    child: DataNodeWidget(
+                                        node: widget.node.value[index],
+                                        i: widget.i + 1),
+                                  ),
                                 ),
                               ],
                             ValueType.leaf => [

@@ -19,11 +19,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: 
-      HomeView(),
-      // const Center(
-      //   child: Text('Home Page'),
-      // ),
+      body: const HomeView(),
     );
   }
 }
