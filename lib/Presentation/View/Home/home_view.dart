@@ -1,13 +1,10 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
-import 'package:flow_er/Domain/Node/data_node.dart';
+import 'package:flow_er/Domain/Node/node_functions.dart';
+import 'package:flow_er/Presentation/Widgets/Home/data_node_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../../../Domain/Node/nodes_controller.dart';
-
 class HomeView extends StatefulWidget {
-  HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -38,8 +35,7 @@ class _HomeViewState extends State<HomeView> {
                 switch (snap.connectionState) {
                   case ConnectionState.done:
                     if (snap.data != null) {
-                      return DataNodeWidget(
-                          node: NodeController.start(snap.data));
+                      return DataNodeWidget(node: start(snap.data));
                     }
                     return const Text('Error Snap');
                   case ConnectionState.waiting:
@@ -55,67 +51,6 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class DataNodeWidget extends StatefulWidget {
-  final DataNode node;
-  const DataNodeWidget({
-    required this.node,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<DataNodeWidget> createState() => _DataNodeWidgetState();
-}
-
-class _DataNodeWidgetState extends State<DataNodeWidget> {
-  bool isOpen = true;
-
-  void toggleOpen() => setState(() {
-        isOpen = !isOpen;
-      });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 24,
-      ),
-      child: isOpen || widget.node.valueType == ValueType.leaf
-          ? InkWell(
-              onTap: widget.node.valueType == ValueType.leaf
-                  ? null
-                  : () {
-                      toggleOpen();
-                    },
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ...switch (widget.node.valueType) {
-                    ValueType.map || ValueType.list => [
-                        Text(widget.node.key ?? ''),
-                        ...List.generate(
-                          widget.node.value.length,
-                          (index) =>
-                              DataNodeWidget(node: widget.node.value[index]),
-                        )
-                      ],
-                    ValueType.leaf => [
-                        Text(
-                            '${widget.node.key ?? ''}: ${widget.node.value.toString()}'),
-                      ],
-                  }
-                ],
-              ),
-            )
-          : TextButton(
-              onPressed: () {
-                toggleOpen();
-              },
-              child: Text('Closed: ${widget.node.valueType}'),
-            ),
     );
   }
 }

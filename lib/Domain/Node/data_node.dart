@@ -17,5 +17,5 @@ class DataNode {
 
   @override
   String toString() =>
-      '\nDataNode{key:"$key", valueType=>"${valueType.name}", value=>"$value"}';
+      ' DataNode{key:"$key", valueType=>"${valueType.name}", value=>"$value"} ';
 }
