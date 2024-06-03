@@ -1,4 +1,5 @@
-import 'package:flow_er/Presentation/View/Home/api_tab_view.dart';
+import 'package:flow_er/Presentation/View/Home/network_data_view.dart';
+import 'package:flow_er/Presentation/View/Home/response_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +13,7 @@ class HomeView extends ConsumerStatefulWidget {
 class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         // TODO: add list of tab on top.
         // TODO: It is also possible to have it as a
@@ -39,9 +40,28 @@ class _HomeViewState extends ConsumerState<HomeView> {
         //     ],
         //   ),
         // ),
-        Divider(),
+
+        const Divider(),
+
+        //
         Expanded(
-          child: ApiTabView(),
+          child: Row(
+            children: [
+              const Expanded(
+                flex: 2,
+                child: NetworkDataView(),
+              ),
+              Container(
+                margin: const EdgeInsets.all(6),
+                width: 5,
+                color: Theme.of(context).colorScheme.primary.withOpacity(.1),
+              ),
+              const Expanded(
+                flex: 3,
+                child: ResponseView(),
+              ),
+            ],
+          ),
         ),
       ],
     );

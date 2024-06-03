@@ -1,3 +1,4 @@
+import 'package:flow_er/Presentation/Page/GlobalOptions/global_options_page.dart';
 import 'package:flow_er/Presentation/Page/Home/home_page.dart';
 import 'package:flow_er/Presentation/Page/Settings/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,11 @@ final router = GoRouter(
           name: Routes.settings,
           path: 'settings',
           builder: (context, state) => const SettingsPage(),
+        ),
+        GoRoute(
+          name: Routes.globalOptions,
+          path: 'globalOptions',
+          builder: (context, state) => const GlobalOptionsPage(),
         )
       ],
     ),
@@ -26,4 +32,5 @@ final router = GoRouter(
 class Routes {
   static const home = 'home';
   static const settings = 'settings';
+  static const globalOptions = 'globalOptions';
 }

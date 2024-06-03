@@ -17,6 +17,12 @@ class HomePage extends StatelessWidget {
             },
             icon: const Icon(Icons.settings),
           ),
+          IconButton(
+            onPressed: () {
+              router.goNamed(Routes.globalOptions);
+            },
+            icon: const Icon(Icons.all_out),
+          ),
         ],
       ),
       body: const HomeView(),
